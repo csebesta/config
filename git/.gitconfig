@@ -1,0 +1,7 @@
+[user]
+	name = Chad Sebesta
+	email = csebesta@users.noreply.github.com
+[core]
+	editor = vim
+[credential]
+	helper = cache
