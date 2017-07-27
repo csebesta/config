@@ -1,0 +1,4 @@
+graphicsmagick
+stow
+tilda
+vlc
