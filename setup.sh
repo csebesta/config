@@ -1,18 +1,11 @@
 #!/bin/bash
 # Home directory configuration script
-# Written by
+# Written by Chad Sebesta
 
 # Install packages from packages.txt
 #for i in packages.txt
 #	apt-get install -y
 #	echo "... Installed succesfully"
-
-# Resolve naming conflicts by moving existing files to an archive directory
-
-# Install configuration files using stow
-#for f in $(find dircolors -type f); do
-#	echo "$HOME/${f#*/}"
-#done
 
 # For every directory in the stow directory...
 for d in */; do
@@ -27,22 +20,10 @@ for d in */; do
 		i="$HOME/${f#*/}"
 		if [ -f $i ]; then
 			rm -rfi $i
-			echo "Deleting $i"
 		fi
-		#echo $i
 	done
 
 	# Stow the contents of the directory
-	stow $d > /dev/null 2>&1
+	stow $d > /dev/null 2>&1 && echo "Stowed $d successfully"
 
 done
-
-#stow bash
-#	#for i in $files; do
-	#	echo "$HOME/${i#*/}"
-	#done
-	#echo $files
-	#if [ -e $d* ]; then
-	#	echo "ok"
-	#fi
-	#stow $d
