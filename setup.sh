@@ -24,6 +24,8 @@ for d in */; do
 	done
 
 	# Stow the contents of the directory
-	stow $d > /dev/null 2>&1 && echo "Stowed $d successfully"
+	stow $d > /dev/null 2>&1 \
+	&& echo "Stowed $d successfully" \
+	|| echo "Failed to stow $d"
 
 done
