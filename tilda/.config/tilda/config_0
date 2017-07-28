@@ -1,6 +1,6 @@
 tilda_config_version = "1.3.1"
 # command = ""
-font = "Ubuntu Mono 14"
+font = "Ubuntu Mono 16"
 key = "grave"
 addtab_key = "<Shift><Control>t"
 fullscreen_key = "F11"
