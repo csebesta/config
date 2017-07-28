@@ -2,11 +2,6 @@
 # Home directory configuration script
 # Written by Chad Sebesta
 
-# Install packages from packages.txt
-#for i in packages.txt
-#	apt-get install -y
-#	echo "... Installed succesfully"
-
 # For every directory in the stow directory...
 for d in */; do
 

@@ -1,4 +1,5 @@
 graphicsmagick
 stow
 tilda
+vim
 vlc
