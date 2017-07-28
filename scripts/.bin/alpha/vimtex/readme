@@ -1,0 +1,9 @@
+Requirements:
+1. Open gvim and pdfviewer (evince) side by side
+2. When one is closed or minimized, the other does the same (master, slave)
+
+Even simpler:
+1. remapped pdflatex command (F6) compiles document AND opens viewer in new background window. No script is required.
+2. No resizing takes place.
+3. Viewer can be changed with a variable.
+NOTE: Opening pdf (appending extension) may prove difficult.

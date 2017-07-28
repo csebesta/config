@@ -1,0 +1,16 @@
+#!/bin/bash
+# Test script
+
+read_dom () {
+	local IFS=\>
+	read -d \< ENTITY CONTENT
+}
+
+# Use function to fetch Gnome version
+while read_dom; do
+	if [[ $ENTITY = "platform" ]]; then
+		GNOME="$CONTENT"
+		#exit
+	fi
+done < /usr/share/gnome/gnome-version.xml
+echo $GNOME

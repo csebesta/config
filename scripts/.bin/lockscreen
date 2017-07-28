@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# lockscreen: Changes wallpaper of lockscreen
+
+# Must be running as sudo
+if (( $EUID == 0 )); then
+	# Do nothing
+	:
+else
+	echo 'No sudo'
+	exit 1
+fi
+
+FILE='/usr/share/glib-2.0/schemas/10_unity_greeter_background.gschema.override'
+#WALLPAPER='/foo/wallpaper.png'
+WALLPAPER='/home/chad/Pictures/Wallpapers/paperman.jpg'
+
+# If file exists allow overwriting
+if [ -f "$FILE" ]; then
+	echo 'File exists'
+	read -p 'Overwrite? [Y/y]: ' REPLY
+	REPLY=$(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
+	echo $REPLY
+	if [ "$REPLY" == 'y' ]; then
+		cat <<- EOF > $FILE
+		[com.canonical.unity-greeter]
+		draw-user-backgrounds=false
+		background='$WALLPAPER'
+		EOF
+		echo 'File overwritten:'
+		cat $FILE
+	else
+		echo 'File not overwritten:'
+		cat $FILE
+	fi
+# Create file if it does not exist
+else
+	echo 'Creating file:'
+	cat <<- EOF > $FILE
+	[com.canonical.unity-greeter]
+	draw-user-backgrounds=false
+	background='$WALLPAPER'
+	EOF
+	cat $FILE
+fi
+
+# Recompile schemas
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+# Completion of scripts will require reboot
+# Or switch to virtual terminal and: lightdm restart

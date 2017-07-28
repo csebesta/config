@@ -1,0 +1,12 @@
+# Information that should or might be listed
+machine name
+logged on user
+operating system
+uptime
+
+# Notes
+information should be generating on login (allows user info)
+file should be saved to /tmp
+colors should be tasteful
+no inessential information should be listed
+multiple scripts should be cosolidated (background 'normal' 'sombra' 'info')

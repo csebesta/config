@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+# Test script for python
+
+# Import modules
+import os
+import time
+
+# Declare variables
+n=11
+
+# Main
+while n > 1:
+	n = n - 1
+	os.system('clear')
+	print( str( n ) + '...' )
+	time.sleep(1)
+else:
+	os.system('clear')
+	print('blastoff')

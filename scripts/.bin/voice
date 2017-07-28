@@ -1,0 +1,7 @@
+#!/bin/bash
+# To run: voice.sh "Hello world!"
+# To read file contents: voice.sh "$(cat <filename)"
+# Valid languages: en-US, en-GB, de-DE, es-ES, fr-FR, it-IT
+pico2wave -l=en-GB -w=/tmp/voice.wav "$1"
+paplay /tmp/voice.wav 2> /dev/null
+rm /tmp/voice.wav 1> /dev/null

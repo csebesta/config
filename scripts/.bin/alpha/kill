@@ -1,0 +1,22 @@
+#!/bin/bash
+# Script to prompt for confirmation when killing processes with pkill
+# Might be possible to alias this script to 'kill'
+
+if (( $1 == $(pgrep -x $1) ))
+then
+	#PROCESS="$(pgrep -x $1)"
+	echo "command execute"
+	exit
+else
+	#echo 'command execute'
+	exit
+fi
+
+if [[ "$2" ]]
+then
+	echo 'Too many arguments'
+	exit
+else
+	# Some command
+	echo 'confirmed'
+fi

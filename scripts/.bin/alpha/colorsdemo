@@ -1,0 +1,6 @@
+#!/bin/bash
+# Test script
+RED='\033[0;31m'
+WHITE='\033[1;37m'
+NC='\033[0m'
+printf "I ${RED}LOVE${NC} Linux\n"

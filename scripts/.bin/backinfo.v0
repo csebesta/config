@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# This "old" version of backinfo contains some useful information
+# There are also some alternate commands
+
+# Script for imitating Window's backinfo functionality in Ubuntu
+# Script for imitating the behavior of Microsoft's backinfo program
+# Start this script on system boot or login
+# Color pallete: https://design.ubuntu.com/brand/colour-palette
+# Candidate colors: 2C001E 333333 2D2D2D
+# Text colors: FFFFFF F9F9F9 (with 2D2D2D) DEDEDE DCDCDC
+# Requires graphicsmagick
+
+# Order of info:
+# Machine name (bold text)
+# OS information
+# Logged on user
+# Cpu (cores and speed), Ram (GB)
+# IPv4 address, Machine domain
+
+# Get screen resolution
+RESOLUTION="$(xdpyinfo | awk '/dimensions/{print $2}')"
+echo $RESOLUTION
+
+# Get system information
+
+#OS="$(</proc/version)"
+OS="$(lsb_release -d | awk -F":	" '/Description/{ print $2; exit }' )"
+
+CORES="$( awk -F": " '/cpu cores/{ print $2; exit }' /proc/cpuinfo )"
+CLOCK="$( awk -F": " '/cpu MHz/{ printf "%.0f\n", $2; exit }' /proc/cpuinfo )"
+CPU="$CORES at $CLOCK MHz"
+
+RAM="$( awk '/MemTotal/{ printf "%.2f\n", $2/(1024^2); exit }' /proc/meminfo )"
+
+#IP="$(hostname -I)"
+IP="$( ip route get 1 | awk '{print $NF; exit }' )" # More reliable?
+
+DOMAIN="$(domainname)" # Portable?
+
+echo $HOSTNAME
+echo "OS: $OS"
+echo "Logged on user: $USER"
+echo "CPU: $CORES at $CLOCK MHz"
+echo "RAM: $RAM GB"
+echo "IPv4 address: $IP"
+echo "Machine domain: $DOMAIN"
+
+# Create background with solid color
+# http://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+# Use if command described in link above for backwards compatibility
+#convert -size $RESOLUTION xc:#2C001E /tmp/bginfo.png
+#convert -size $RESOLUTION xc:#2D2D2D /tmp/bginfo.jpg
+# Text color: f9f9f9
+#convert -size $RESOLUTION xc:#2D2D2D \
+#	-gravity Center \
+#	-font Helvetica -weight 700 -pointsize 200 \
+#	-annotate 0 "$HOSTNAME\n$USER\n$OS" \
+#	/tmp/backinfo.jpg
+	#-gravity Center \
+
+#convert -size $RESOLUTION xc:#2D2D2D \
+#	-font Helvetica -pointsize 24 -fill white \
+#	-annotate 'This' /tmp/bg.jpg \
+#	/tmp/backinfo.jpg
+
+#convert -size $RESOLUTION xc:#2D2D2D \
+#	-fill white -font Helvetica \
+#	caption:'This text is there to stay' \
+#	/tmp/backinfo.jpg
+
+#convert -background 2D2D2D -fill white -font Helvetica -pointsize 16 -size $RESOLUTION \
+#	-gravity center caption:'MACHINE' \
+#	/tmp/backinfo.jpg
+
+#convert -background '#2d2d2d' -fill white \
+#	-font Helvetica -pointsize 16 -size $RESOLUTION \
+#	-gravity center caption:'MACHINE' \
+#	lablel:"this" \
+#	/tmp/backinfo.jpg
+
+#FONT="/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+FONT="/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-M.ttf"
+gm convert \
+	-size $RESOLUTION xc:#2d2d2d \
+	-fill '#f9f9f9' -font $FONT -pointsize 48\
+	-gravity Center \
+	-draw \
+	"text 0,-80 '$HOSTNAME'" \
+	-fill '#f9f9f9' -font $FONT -pointsize 16 \
+	-gravity Center \
+	-draw \
+	"text 0,0 '\
+Logged on user: $USER
+OS: $OS
+CPU: $CPU    RAM: $RAM GB
+IPv4 adress: $IP    Machine domain: $DOMAIN
+Boot time: $(date)'" \
+	/tmp/backinfo.jpg
+
+
+# Set image as background
+gsettings set org.gnome.desktop.background \
+picture-uri file:///tmp/backinfo.jpg

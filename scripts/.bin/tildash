@@ -1,0 +1,10 @@
+#!/bin/bash
+# Prevent second instance of tilda
+# Alias the tilda command to this script
+
+if [ "$(pgrep -x tilda)" ]
+	then
+	echo "Tilda is running"
+	else
+		tilda &
+fi

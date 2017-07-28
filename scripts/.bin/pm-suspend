@@ -1,0 +1,14 @@
+#!/bin/bash
+# Script to lock screen and suspend
+# Alias pm-suspend to this script
+
+# Check if sudo has been entered or currently root
+# Method may not be reliable or secure
+# Script is causing occasional kernel oops seemingly related to networking
+if (( $EUID == 0 )); then
+	su -c "gnome-screensaver-command -l" "$SUDO_USER"
+	pm-suspend
+else
+	echo "No sudo"
+	exit 1
+fi

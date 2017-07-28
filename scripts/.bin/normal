@@ -1,0 +1,9 @@
+#!/bin/bash
+# Color pallete: https://design.ubuntu.com/brand/colour-palette
+
+# Set background to normal image
+gsettings set org.gnome.desktop.background picture-uri \
+file://$HOME/Pictures/Wallpapers/paperman.jpg
+
+# Unhide the unity launcher
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 0

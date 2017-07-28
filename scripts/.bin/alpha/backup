@@ -1,0 +1,14 @@
+#!/bin/bash
+# Script to backup home folder to external device
+# Information will be displayed and ask for confirmation
+
+# Path to recieve backup
+DEVICE="/media/chad/My\ Passport/Backup/machine"
+# Target to be backed up
+TARGET=""
+# File exclusions
+EXCLUDE=""
+# Date (name of backup folder)
+DATE="$(date +"%m%d%y")"
+
+# Main program

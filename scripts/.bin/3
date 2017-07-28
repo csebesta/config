@@ -1,0 +1,153 @@
+#!/bin/bash
+# Script for imitating backinfo in Ubuntu and Gnome based distributions
+# Also adding support for Raspbian (LXDE)
+# Color pallete: https://design.ubuntu.com/brand/colour-palette
+# Colors: 2D2D2D (with F9F9F9)
+# Alternate colors: 2C001E 002B36 333333
+# Alternate text colors: 555555 999999
+# Requires graphicsmagick
+# Written by a novice
+# Apologies in advance
+
+# Make sure necessary programs exist BEFORE running
+if ! hash gm 2> /dev/null; then
+	echo "Please install graphicsmagick"
+	exit
+fi
+
+# Get screen resolution
+RESOLUTION="$( xdpyinfo | awk '/dimensions/{print $2}' )"
+
+# Get system information
+HOSTNAME="$( hostname )" # Use uname -n instead (POSIX standard)
+USER="$( id -un )"
+
+# Get OS information
+# LSB is not a universal standard, consider /etc/os-release /etc/*-release or other method
+# Use facter?
+# Also /etc/issue (FHS, although "optional")
+# test lsb_release, then /etc/issue, then /etc/*-release ( grep this file )
+
+# Get OS info, checking lsb_release first
+if hash lsb_release 2> /dev/null; then
+	OS="$( lsb_release -d | awk -F"	" '/Description/{ print $2; exit }' )"
+# Attempt reading of /etc/issue (FHS specified, but optional)
+# There MUST be a simpler way to parse this file
+elif [ -f /etc/issue ]; then
+	OS="$( sed -r 's/\\.//g' /etc/issue | sed -e 's/[[:space:]]*$//' | head -1 )"
+# Attempt reading /etc/os-release (usually consistent)
+elif [ -f /etc/os-release ]; then
+	source /etc/os-release
+	OS="$PRETTY_NAME"
+# Use facter as last resort
+# Is this really neccessary though ( given lsb_release? )
+elif hash facter 2> /dev/null; then
+	OS="$( facter lsbdistdescription )"
+else
+	OS="Not availiable"
+fi
+
+# CPU and RAM information
+CORES="$( awk -F": " '/cpu cores/{ print $2; exit }' /proc/cpuinfo )"
+CLOCK="$( awk -F": " '/cpu MHz/{ printf "%.0f\n", $2; exit }' /proc/cpuinfo )"
+RAM="$( awk '/MemTotal/{ printf "%.2f\n", $2/(1024^2); exit }' /proc/meminfo )"
+
+# Is returning "Network is unreachable" error?
+# Use if statement to suppress error and display "(none)" when unavailiable
+IP="$( ip route get 1 2> /dev/null | awk '{ print $NF; exit }' )"
+#if [ $IP "" ]; then
+#	IP='(none)'
+#fi
+
+DOMAIN="$( domainname )" # Portable?
+
+# Write output to TEXT variable
+read -r -d '' TEXT << EOF
+Logged on user: $USER
+OS: $OS
+CPU: $CORES at $CLOCK MHz    \
+RAM: $RAM GB
+IPv4 address: $IP    \
+Machine domain: $DOMAIN
+Login time: $(date)
+EOF
+
+# http://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+# Use if command described in link above for backwards compatibility
+
+# Create solid background and overlay text
+FONT="/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-M.ttf"
+gm convert \
+	-size $RESOLUTION xc:#2d2d2d \
+	-fill '#f9f9f9' -font $FONT -pointsize 48\
+	-gravity Center \
+	-draw "text 0,-80 '$HOSTNAME'" \
+	-fill '#999999' -font $FONT -pointsize 16 \
+	-gravity Center \
+	-draw "text 0,0 '$TEXT'" \
+	/tmp/backinfo.jpg
+	
+## Print to stdout when called from command line
+#echo "Resolution: $RESOLUTION"
+#echo "Hostname: $HOSTNAME"
+#echo "OS: $OS"
+#echo "Logged on user: $USER"
+#echo "CPU: $CORES at $CLOCK MHz"
+#echo "RAM: $RAM GB"
+#echo "IPv4 address: $IP"
+#echo "Machine domain: $DOMAIN"
+#echo "Login time: $(date)"
+
+# Check for command existence and get Gnome version
+# Should Gnome version be got from gnome-release.xml instead?
+# Add check for running gui
+if hash gnome-session 2> /dev/null; then
+
+	# Get Gnome version number
+	GNOME="$( gnome-session --version 2> /dev/null | \
+	awk '/gnome-session/{printf "%.1s", $2; exit}' )"
+
+	# Set background using proper method
+	# Add and test for gsettings
+	if (( $GNOME == 3 )); then
+		gsettings set org.gnome.desktop.background \
+		picture-uri file:///tmp/backinfo.jpg
+	elif (( $GNOME == 2 )); then
+		echo "Gnome 2 is not supported"
+	else
+		echo "This distribution is not supported"
+		exit
+	fi
+
+# Check If running Raspian (LXDE)
+# Needs additional research (pcman --desktop to enable?)
+elif hash pcmanfm 2> /dev/null; then
+
+	## Raspberry pi method:
+	#pcmanfm --set-wallpaper="Path to file or variable"
+	pcmanfm --set-wallpaper="/tmp/backinfo.jpg"
+
+# If not a supported system, echo warning and exit
+else
+
+	# Echo warning
+	echo "This distribution is not supported"
+	exit
+
+fi
+
+# Remaining concerns:
+
+# Clean up code
+# Awk and Sed commands CAN be simplified
+# Can line spacing be increased with draw command?
+# Display manager should not display last login wallpaper
+# Silence the echo commands when running from a script
+# System information should be read only once and written to file for reference
+
+# These concerns will be addressed in a separate "universal" script:
+# Portablility across Debian/Gnome based operating systems
+# Target Debian, Ubuntu, and Raspbian (LXDE may present problems)
+# Check Posix standards and make sure all programs (except gm) are universal
+# Check Posix standards and make sure all info source files are universal
+# Select an attractive default font (must also be univesral)

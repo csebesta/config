@@ -1,0 +1,128 @@
+#!/bin/bash
+# Script for imitating backinfo functionality in Ubuntu
+# Should be compatible with versions 12.04 and up
+# Color pallete: https://design.ubuntu.com/brand/colour-palette
+# Colors: 2D2D2D (with F9F9F9)
+# Alternate colors: 2C001E 002B36 333333
+# Alternate text colors: 555555 999999
+# Requires graphicsmagick
+
+# Order of information:
+# Hostname (bold text)
+# Logged on user
+# OS description
+# Cpu (cores and speed), Ram (GB)
+# IPv4 address, Machine domain
+
+# Get screen resolution
+RESOLUTION="$(xdpyinfo | awk '/dimensions/{print $2}')"
+
+# Get system information
+HOSTNAME="$(hostname)" # Use uname -n instead (POSIX standard)
+USER="$(id -un)"
+# LSB is not a universal standard, consider /etc/os-release /etc/*-release or other method
+# Also /etc/issue (FHS, although "optional")
+# test lsb_release, then /etc/issue, then /etc/*-release ( grep this file )
+OS="$(lsb_release -d | awk -F":	" '/Description/{ print $2; exit }' )"
+CORES="$( awk -F": " '/cpu cores/{ print $2; exit }' /proc/cpuinfo )"
+CLOCK="$( awk -F": " '/cpu MHz/{ printf "%.0f\n", $2; exit }' /proc/cpuinfo )"
+CPU="$CORES at $CLOCK MHz"
+RAM="$( awk '/MemTotal/{ printf "%.2f\n", $2/(1024^2); exit }' /proc/meminfo )"
+IP="$( ip route get 1 | awk '{print $NF; exit }' )" # More reliable?
+DOMAIN="$(domainname)" # Portable?
+
+## Write to stdout when called from command line
+#echo "Resolution: $RESOLUTION"
+#echo "Hostname: $HOSTNAME"
+#echo "OS: $OS"
+#echo "Logged on user: $USER"
+#echo "CPU: $CORES at $CLOCK MHz"
+#echo "RAM: $RAM GB"
+#echo "IPv4 address: $IP"
+#echo "Machine domain: $DOMAIN"
+#echo "Login time: $(date)"
+
+SPACE='    '
+read -r -d '' TEXT << END
+Logged on user: $USER
+OS: $OS
+CPU: $CORES at $CLOCK    RAM : $RAM GB
+IPv4 address: $IP    Machine domain: $DOMAIN
+Login time: $(date)
+END
+
+# http://askubuntu.com/questions/66914/how-to-change-desktop-background-from-command-line-in-unity
+# Use if command described in link above for backwards compatibility
+
+# Create solid background and overlay text
+FONT="/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-M.ttf"
+gm convert \
+	-size $RESOLUTION xc:#2d2d2d \
+	-fill '#f9f9f9' -font $FONT -pointsize 48\
+	-gravity Center \
+	-draw "text 0,-80 '\
+$HOSTNAME'" \
+	-fill '#999999' -font $FONT -pointsize 16 \
+	-gravity Center \
+	-draw "text 0,0 '\
+Logged on user: $USER
+OS: $OS
+CPU: $CPU    RAM: $RAM GB
+IPv4 address: $IP    Machine domain: $DOMAIN
+Login time: $(date)'" \
+	/tmp/backinfo.jpg
+
+## Create solid background and overlay text
+#FONT="/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-M.ttf"
+#gm convert \
+#	-size $RESOLUTION xc:#2d2d2d \
+#	-fill '#f9f9f9' -font $FONT -pointsize 48\
+#	-gravity Center \
+#	-draw "text 0,-80 '$HOSTNAME'" \
+#	-fill '#999999' -font $FONT -pointsize 16 \
+#	-gravity Center \
+#	-draw "text 0,0 '$TEXT'" \
+#	/tmp/backinfo.jpg
+	
+## Test if command exists
+#command -v gnome-session > /dev/null 2>&1 || \
+#{ echo "Gnome does not exist" >&2; exit 1; }
+
+## Check gnome version and use appropriate method for setting background
+## Regex pattern during awk is neccesarry to screen out errors from themes
+#GNOME="$( \
+#gnome-session --version 2> /dev/null | \
+#awk '/gnome-session/{print $NF; exit}' | \
+#awk -F"." '{ print $1; exit}' \
+#)"
+#echo "Gnome version is: $GNOME"
+
+#if (( $GNOME == 3 )); then
+#	gsettings set org.gnome.desktop.background \
+#	picture-uri file:///tmp/backinfo.jpg
+#elif (( $GNOME == 2 )); then
+#	echo "Gnome 2 is currently unsupported"
+#fi
+
+## Raspberry pi method:
+#pcmanfm --set-wallpaper="Path to file or variable"
+#pcmanfm --set-wallpaper="/tmp/backinfo.jpg"
+
+# Set image as background
+gsettings set org.gnome.desktop.background \
+picture-uri file:///tmp/backinfo.jpg
+
+# Remaining concerns:
+
+# These concerns will be addressed in a separate "universal" script:
+# Portablility across Debian/Gnome based operating systems
+# Target Debian, Ubuntu, and Raspbian (LXDE may present problems)
+# Check Posix standards and make sure all programs (except gm) are universal
+# Check Posix standards and make sure all info source files are universal
+# Select an attractive default font (must also be univesral)
+
+# Clean up code
+# Can line spacing be increased with draw command?
+# Display manager should not display last login wallpaper
+# Silence the echo commands when running from a script
+# System information should be read only once and written to file for reference
