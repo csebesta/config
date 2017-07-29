@@ -44,6 +44,9 @@ nnoremap \ :noh<CR>
 set ttyfast
 set lazyredraw
 
+" Move netrwhist outside of vim configuration directory
+let g:netrw_home=$HOME
+
 " Graphical Vim
 if has('gui_running')
 	" Start maximized
