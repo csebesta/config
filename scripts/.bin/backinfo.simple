@@ -34,11 +34,11 @@ gm convert \
 	-fill '#999999' -font $FONT -pointsize 16 \
 	-gravity Center \
 	-draw "text 0,0 '$TEXT'" \
-	/tmp/backinfo.jpg
+	/tmp/backinfo.png
 	
 	# Set background using proper method
 gsettings set org.gnome.desktop.background \
-picture-uri file:///tmp/backinfo.jpg
+picture-uri file:///tmp/backinfo.png
 
 # Detect if running on command line and output relevant info
 #if [[ $- == *i* ]]; then
