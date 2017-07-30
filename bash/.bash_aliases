@@ -60,19 +60,19 @@ alias df='df -h'
 alias free='free -h'
 
 # Add custom sripts to path (~/.sripts)
-# Aliases for using scripts
-if [ -d "$HOME/.scripts" ] ; then
-	PATH="$PATH:$HOME/.scripts"
-fi
+## Aliases for using scripts
+#if [ -d "$HOME/.scripts" ] ; then
+#	PATH="$PATH:$HOME/.scripts"
+#fi
 
-# Add path for scripts in progress (unfinished) for easier testing
-if [ -d "$HOME/.scriptst" ] ; then
-	PATH="$PATH:$HOME/.scriptst"
-fi
+## Add path for scripts in progress (unfinished) for easier testing
+#if [ -d "$HOME/.scriptst" ] ; then
+#	PATH="$PATH:$HOME/.scriptst"
+#fi
 
 # Aliases for scripts that replace or modify pre-existing program behavior
-alias tilda="$HOME/.scripts/tildash"
-alias pm-suspend="$HOME/.scripts/pm-suspend"
+alias tilda="$HOME/.bin/tildash"
+alias pm-suspend="$HOME/.bin/pm-suspend"
 
 # Change beep to visual representation
 # Critical urgency allows notification in fullscreen applications
