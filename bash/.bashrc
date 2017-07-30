@@ -116,4 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-eval $(dircolors $HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark)
+# Change dircolors
+DIRCOLORS="$HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark"
+if [ -f $DIRCOLORS ]; then
+	eval $(dircolors $DIRCOLORS)
+fi

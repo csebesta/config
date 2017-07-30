@@ -15,6 +15,11 @@ alias li='ls -li --color=auto'
 alias ll='ls -l --color=auto'
 #alias lA='ls -A'
 
+alias ghc='ghc -hidir /tmp -odir /tmp'
+
+# PS1 prompt for ubuntu
+#PS1='\u@\h:\w\$ '
+
 # List and sort?
 #alias lss='ls -ACq --color='always' | sort -t '.' -k2' # Almost works, see examples.d...
 #alias lA='ls -ACqX --color=always'
