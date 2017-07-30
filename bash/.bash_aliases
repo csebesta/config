@@ -9,6 +9,7 @@ alias gi='vim -g'
 alias vi='vim'
 
 # Listing aliases
+alias ls='ls --group-directories-first --color=always'
 alias l.='ls -d .[!.]* --color=auto 2> /dev/null'
 #; if [ $? != 0 ]; then echo "No dotfiles present"; fi'
 alias li='ls -li --color=auto'
