@@ -1,0 +1,27 @@
+# http://www.noobslab.com/2014/04/thingstweaks-to-do-after-install-of.html
+
+# Disable overlay scrollbars (conflicts with flatabulous theme)
+# Enter following command in terminal to disable overlay scrollbar:
+gsettings set com.canonical.desktop.interface scrollbar-mode normal
+# If you want to get back overlay bars, enter following command:
+gsettings reset com.canonical.desktop.interface scrollbar-mode
+
+# LightDM tweaks
+# To remove white dots, enter following commands in Terminal:
+sudo xhost +SI:localuser:lightdm
+sudo su lightdm -s /bin/bash
+gsettings set com.canonical.unity-greeter draw-grid false;exit
+# To remove guest account open Terminal and enter following command:
+Terminal Command:
+echo allow-guest=false | sudo tee -a /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+
+# If something went wrong you can reset Unity desktop with following commands:
+sudo apt-get install dconf-tools
+dconf reset -f /org/compiz/
+setsid unity
+unity --reset-icons
+
+# Change keybindings for <Super> key in unity-tweak-tool
+# Uncheck "Hold Super for Keyboard shortcuts
+# Disable or change "Show the launcher" from the default <Super> binding
+# This will allow the <Super> key to be used as a modifier
