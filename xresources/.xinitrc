@@ -6,4 +6,4 @@ fi
 
 #exec i3
 #exec gnome-session
-exec xmonad
+#exec xmonad
