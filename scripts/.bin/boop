@@ -18,8 +18,8 @@ composite -gravity center ~/Pictures/sombra.png /tmp/bgsombra.jpg \
 gsettings set org.gnome.desktop.background \
 picture-uri file:///tmp/bgsombra.jpg
 
-# Hide the unity launcher
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
+## Hide the unity launcher
+#gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
 
 ## Witty message
 #ICN="$HOME/Pictures/sombra.png"
