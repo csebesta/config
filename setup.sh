@@ -2,11 +2,21 @@
 # Home directory configuration script
 # Written by Chad Sebesta
 
+
+# Cleanup broken symlinks in the home directory
+# Not doing this may lead to conflicts while using stow
+echo "There are $(find -L $HOME -type l | wc -l) broken symlinks"
+read -p "Delete these broken symlinks? "
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	find -L $HOME -type l -print -delete
+else
+	echo "No symlinks deleted"
+fi
+
+echo "----------"
+
 # For every directory in the stow directory...
 for d in */; do
-
-	## Cleanup broken symlinks in the home directory
-	#find -L $HOME -type l -delete
 
 	# Unstow directory before completing operations
 	# This prevents the script from deleting the contents of the stow directory
