@@ -5,6 +5,9 @@
 # For every directory in the stow directory...
 for d in */; do
 
+	## Cleanup broken symlinks in the home directory
+	#find -L $HOME -type l -delete
+
 	# Unstow directory before completing operations
 	# This prevents the script from deleting the contents of the stow directory
 	stow -D $d > /dev/null 2>&1
