@@ -2,18 +2,23 @@
 # Home directory configuration script
 # Written by Chad Sebesta
 
+SEP='----------'
 
 # Cleanup broken symlinks in the home directory
 # Not doing this may lead to conflicts while using stow
-echo "There are $(find -L $HOME -type l | wc -l) broken symlinks"
+# Check number of broken symlinks
+symlinkn=$(find -L $HOME -type l | wc -l)
+echo "There are $symlinkn broken symlinks"
+
+# Confirm action
 read -p "Delete these broken symlinks? "
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]] && [[ $symlinkn -ne 0 ]]; then
 	find -L $HOME -type l -print -delete
 else
 	echo "No symlinks deleted"
 fi
 
-echo "----------"
+echo $SEP
 
 # For every directory in the stow directory...
 for d in */; do
