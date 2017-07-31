@@ -4,20 +4,27 @@
 
 SEP='----------'
 
-# Cleanup broken symlinks in the home directory
+# Check for broken symlinks in the home directory
 # Not doing this may lead to conflicts while using stow
-# Check number of broken symlinks
 symlinkn=$(find -L $HOME -type l | wc -l)
 echo "There are $symlinkn broken symlinks"
 
-# Confirm action
-read -p "Delete these broken symlinks? "
-if [[ $REPLY =~ ^[Yy]$ ]] && [[ $symlinkn -ne 0 ]]; then
-	find -L $HOME -type l -print -delete
-else
-	echo "No symlinks deleted"
+# Delete broken symlinks
+if [[ $symlinkn -ne 0 ]]; then
+
+	# Ask for confirmation
+	read -p "Delete these broken symlinks (y/n)? "
+
+	# Delete broken symlinks and print results
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		find -L $HOME -type l -printf "Deleting... %p\n" -delete
+	else
+		echo "No symlinks deleted"
+	fi
+
 fi
 
+# Separator to make output easier to read
 echo $SEP
 
 # For every directory in the stow directory...
