@@ -1,4 +1,4 @@
-#include "/home/chad/.Xresources.dark"
+#include "$HOME/.Xresources.dark"
 
 XTerm*faceName:DejaVu Sans Mono
 XTerm*faceSize:15
