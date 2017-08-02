@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install preferred packages as root and customize environment
+# Install preferred packages and customize environment
 # Written by Chad Sebesta
 
 SEP='----------'
