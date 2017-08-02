@@ -3,6 +3,7 @@
 # Script for imitating backinfo in Ubuntu and Gnome based distributions
 # Color palette: satya164.github.io/numix
 # Color palette: #f9f9f9 #dedede #d64937 #333333 #2d2d2d
+# Highlight color: f0544c
 # Written by Chad Sebesta
 
 # Get screen resolution
@@ -25,7 +26,7 @@ gm convert \
 	-fill '#f9f9f9' -font $FONT -pointsize 48\
 	-gravity Center \
 	-draw "text 0,-50 '$HOSTNAME'" \
-	-fill '#d64937' -font $FONT -pointsize 16 \
+	-fill '#f0544c' -font $FONT -pointsize 16 \
 	-gravity Center \
 	-draw "text 0,0 '$TEXT'" \
 	/tmp/backinfo.png
