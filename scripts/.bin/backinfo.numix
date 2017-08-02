@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Script for imitating backinfo in Ubuntu and Gnome based distributions
+# Color palette: satya164.github.io/numix
+# Color palette: #f9f9f9 #dedede #d64937 #333333 #2d2d2d
+# Written by Chad Sebesta
+
+# Get screen resolution
+RESOLUTION="$( xdpyinfo | awk '/dimensions/{print $2}' )"
+
+# Get system information
+HOSTNAME="$( hostname )" # Use uname -n instead? (POSIX standard)
+USER="$( id -un )"
+
+# Write output to TEXT variable
+read -r -d '' TEXT << EOF
+Logged on user: $USER
+Login time: $(date +'%D %T')
+EOF
+
+# Create solid background and overlay text
+FONT="/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-M.ttf"
+gm convert \
+	-size $RESOLUTION xc:#2d2d2d \
+	-fill '#f9f9f9' -font $FONT -pointsize 48\
+	-gravity Center \
+	-draw "text 0,-50 '$HOSTNAME'" \
+	-fill '#d64937' -font $FONT -pointsize 16 \
+	-gravity Center \
+	-draw "text 0,0 '$TEXT'" \
+	/tmp/backinfo.png
+	
+# Set background using proper method
+gsettings set org.gnome.desktop.background \
+picture-uri file:///tmp/backinfo.png
