@@ -26,6 +26,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	htop
 	redshift-gtk
 	stow
+	suckless-tools
 	tilda
 	vim
 	vlc
