@@ -98,6 +98,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 fi
 
+echo $SEP
+
 # Adjust gtk settings
 read -p "Adjust gtk settings? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
