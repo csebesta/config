@@ -86,6 +86,18 @@ fi
 
 echo $SEP
 
+# Disable guest account
+read -p "Disable guest account? (y/n) "
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+	# Define file
+	FILE='/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
+
+	# Write configuration to file
+	echo -e "[Seats:*]\nallow-guest=false" | sudo tee $FILE > /dev/null
+
+fi
+
 # Adjust gtk settings
 read -p "Adjust gtk settings? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
