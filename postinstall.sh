@@ -11,6 +11,12 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	# Numix repository
 	sudo add-apt-repository ppa:numix/ppa
 
+	# Update repositories
+	echo "Updating repositories..."
+	sudo apt-get update > /dev/null 2>&1 \
+	&& echo "Update successful" \
+	|| echo "Update failed"
+
 fi
 
 echo $SEP
@@ -33,8 +39,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	xbindkeys
 	xmonad
 	"
-
-	echo $PACKAGES
 
 	# Update repositories
 	echo "Updating repositories..."
