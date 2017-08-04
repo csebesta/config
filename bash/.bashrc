@@ -121,8 +121,3 @@ DIRCOLORS="$HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark"
 if [ -f $DIRCOLORS ]; then
 	eval $(dircolors $DIRCOLORS)
 fi
-
-## Use 256 color terminal
-#if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
-#	export TERM=xterm-256color
-#fi
