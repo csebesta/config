@@ -1,0 +1,5 @@
+#include ".Xresources.dark"
+
+XTerm*termName:xterm-256color
+XTerm*faceName:DejaVu Sans Mono
+XTerm*faceSize:15
