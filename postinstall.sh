@@ -135,4 +135,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	# Change icon theme
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Square'
 
+	# Change greeter background to preserve privacy
+	gsettings set com.canonical.unity-greeter draw-user-backgrounds false
+
 fi
