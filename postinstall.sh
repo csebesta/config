@@ -95,7 +95,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	FILE='/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
 
 	# Write configuration to file
-	echo -e "[Seats:*]\nallow-guest=false" | sudo tee $FILE > /dev/null
+	echo -e "[Seats:*]\nallow-guest=false" | sudo tee $FILE > /dev/null \
+	&& echo "Created... $FILE" \
+	|| echo "Failed to create $FILE"
 
 fi
 
