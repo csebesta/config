@@ -31,6 +31,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	graphicsmagick
 	htop
 	redshift-gtk
+	rxvt-unicode
 	stow
 	suckless-tools
 	tilda
