@@ -92,10 +92,26 @@ read -p "Disable guest account? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Define file
-	FILE='/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
+	FILE='/etc/lightdm/lightdm.conf.d/50-no-guest.conf'
 
 	# Write configuration to file
-	echo -e "[Seats:*]\nallow-guest=false" | sudo tee $FILE > /dev/null \
+	echo -e "[Seat:*]\nallow-guest=false" | sudo tee $FILE > /dev/null \
+	&& echo "Created... $FILE" \
+	|| echo "Failed to create $FILE"
+
+	# Define file
+	FILE='/etc/lightdm/lightdm.conf.d/50-hide-users.conf'
+
+	# Write configuration to file
+	echo -e "[Seat:*]\ngreeter-hide-users=true" | sudo tee $FILE > /dev/null \
+	&& echo "Created... $FILE" \
+	|| echo "Failed to create $FILE"
+
+	# Define file
+	FILE='/etc/lightdm/lightdm.conf.d/50-manual-login.conf'
+
+	# Write configuration to file
+	echo -e "[Seat:*]\ngreeter-show-manual-login=true" | sudo tee $FILE > /dev/null \
 	&& echo "Created... $FILE" \
 	|| echo "Failed to create $FILE"
 
@@ -135,7 +151,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	# Change icon theme
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Square'
 
-	# Change unity greeter
+	# Change lock screen
 	gsettings set com.canonical.unity-greeter background-color '#2d2d2d'
 	gsettings set com.canonical.unity-greeter draw-grid 'false'
 
