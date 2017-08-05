@@ -121,8 +121,3 @@ DIRCOLORS="$HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark"
 if [ -f $DIRCOLORS ]; then
 	eval $(dircolors $DIRCOLORS)
 fi
-
-## Overwrite default xresources
-#if [ -f "$HOME/.Xresources" ]; then
-#	xrdb -load "$HOME/.Xresources"
-#fi

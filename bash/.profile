@@ -21,8 +21,3 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Set PATH to include scripts
 PATH="$HOME/.bin:$HOME/.local/.bin:$PATH"
-
-# Overwrite default xresources
-if [ -f "$HOME/.Xresources" ]; then
-	xrdb -load "$HOME/.Xresources"
-fi
