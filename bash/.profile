@@ -21,3 +21,6 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Set PATH to include scripts
 PATH="$HOME/.bin:$HOME/.local/.bin:$PATH"
+
+# Execute backinfo script
+. backinfo.numix
