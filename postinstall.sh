@@ -88,6 +88,7 @@ fi
 echo $SEP
 
 # Disable guest account
+# https://wiki.ubuntu.com/LightDM
 read -p "Disable guest account? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
