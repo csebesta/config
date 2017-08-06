@@ -145,6 +145,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 		|| echo "Failed"
 	done
 
+	# Disable overlay scrollbars
+	gsettings set com.canonical.desktop.interface scrollbar-mode 'normal'
+
 	# Change gtk theme
 	gsettings set org.gnome.desktop.interface gtk-theme 'Numix'
 	gsettings set org.gnome.desktop.wm.preferences theme 'Numix'
