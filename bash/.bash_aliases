@@ -11,43 +11,10 @@ alias vi='vim'
 # Listing aliases
 alias ls='ls --group-directories-first --color=always'
 alias l.='ls -d .[!.]* --color=auto 2> /dev/null'
-#; if [ $? != 0 ]; then echo "No dotfiles present"; fi'
 alias li='ls -li --color=auto'
 alias ll='ls -l --color=auto'
-#alias lA='ls -A'
 
 alias ghc='ghc -hidir /tmp -odir /tmp'
-
-# PS1 prompt for ubuntu
-#PS1='\u@\h:\w\$ '
-
-# List and sort?
-#alias lss='ls -ACq --color='always' | sort -t '.' -k2' # Almost works, see examples.d...
-#alias lA='ls -ACqX --color=always'
-#echo -e "$(ls -Cq --color=always)\n$(ls -Cdq .[!.]* --color=always)"
-
-# List and categorize
-# Number of files next to category? ((none) or 1...)
-#alias lf="\
-#echo -e '$(tput setaf 7)Normal:$(tput sgr 0)'; \
-#ls -Cq --color=always; \
-#echo -e '$(tput setaf 7)Hidden:$(tput sgr 0)'; \
-#ls -d .[!.]* --color=always 2> /dev/null"
-
-# Categorize ALL files and print to stdout
-# ERROR CASES:
-## Cannot detect files predicate with 2 or more dots (i.e. "..file")
-## Will show "Normal:" or "Hidden:" Even when no files exist
-## Solving both problems by including symbolic links (. ..)
-## May add "Other:" categorie for files beginning with unique characters
-
-# Use new function
-#lf () {
-#	echo -e "$(tput setaf 7)Normal:$(tput sgr 0)"
-#	ls -Cq --color=always
-#	echo -e "$(tput setaf 7)Hidden:$(tput sgr 0)"
-#	ls -Cdq .* --color=always 2> /dev/null
-#}
 
 # Miscellaneous aliases
 alias redshift='redshift-gtk'
@@ -82,32 +49,22 @@ tilda () {
 # Aliases are not expanded in scripts, but functions do expand
 
 # Visual beep
-export ICN='/usr/share/icons/Ultra-Flat/emblems/scalable/emblem-ok.svg'
+export ICN='/usr/share/icons/HighContrast/48x48/emblems/emblem-ok.png'
 beep () {
 	notify-send -u critical -i $ICN 'beep'
 }
 
 # Notifications
-export NICN='/usr/share/icons/Ultra-Flat/actions/scalable/stock_about.svg'
+export NICN='/usr/share/icons/HighContrast/48x48/emblems/emblem-important.png'
 notify () {
 	notify-send -u critical -i $NICN "$1" "$2"
 }
 
-
-#!/bin/bash
-
 # lf: A function to display an organized list of normal and hidden files.
 # Useful for getting a quick read on certain directories
-
 # Almost works but '..directory' will not show
 #HIDDEN="$(cd $1 && ls -Cdq .[!.]* --color=always 2> /dev/null)"
 # Using ls --ignore=pattern solves many problems
-
-# Columns misbehaving (i.e. lftest /etc has 3 colums instead of 5)
-# Solved by removal of echo command (i.e. echo "$(ls... ))
-# But now will not display '(none)'
-# Keeping NORMAL and HIDDEN variables to test if empty
-
 lf () {
 
 	# Declare directory
@@ -126,7 +83,6 @@ lf () {
 	if [ -z "$NORMAL" ]; then
 		echo "$(tput setaf 1)(none)$(tput sgr 0)"
 	else
-		#echo "$(ls -Cq --color=always $1)"
 		ls -Cq --color=always --group-directories-first $1
 	fi
 
@@ -136,7 +92,6 @@ lf () {
 	if [ -z "$HIDDEN" ]; then
 		echo "$(tput setaf 1)(none)$(tput sgr 0)"
 	else
-		#echo "$(ls -ACq --ignore=[!.]* $1 --color=always 2> /dev/null)"
 		ls -ACq --ignore=[!.]* $1 --color=always --group-directories-first 2> /dev/null
 	fi
 

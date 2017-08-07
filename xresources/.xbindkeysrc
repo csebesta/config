@@ -1,6 +1,3 @@
 # Set key for tilda
 "tilda"
   Control + grave
-
-"dmenu_run"
-  Control + p
