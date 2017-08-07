@@ -27,20 +27,8 @@ alias df='df -h'
 alias free='free -h'
 
 # Aliases for scripts that replace or modify pre-existing program behavior
-#alias tilda="tildash"
+alias tilda="$HOME/.bin/tildash"
 alias pm-suspend="$HOME/.bin/pm-suspend"
-
-# Limit tilda to a single instance
-tilda () {
-
-	# Check if tilda is running before execution
-	if [ "$(pgrep -x tilda)" ]; then
-		echo "tilda is running"
-	else
-		tilda > /dev/null 2>&1 &
-	fi
-
-}
 
 # Change beep to visual representation
 # Critical urgency allows notification in fullscreen applications

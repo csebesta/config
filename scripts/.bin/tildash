@@ -1,6 +1,6 @@
 #!/bin/bash
 # Limit tilda to a single instance
-# This script is depreceated in favor of a bash function
+# Useful when called from alias or script
 
 if [ "$(pgrep -x tilda)" ]; then
 	echo "tilda is running"
