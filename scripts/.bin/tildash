@@ -1,10 +1,9 @@
 #!/bin/bash
-# Prevent second instance of tilda
-# Alias the tilda command to this script
+# Limit tilda to a single instance
+# This script is depreceated in favor of a bash function
 
-if [ "$(pgrep -x tilda)" ]
-	then
-	echo "Tilda is running"
-	else
-		tilda &
+if [ "$(pgrep -x tilda)" ]; then
+	echo "tilda is running"
+else
+	tilda > /dev/null 2>&1 &
 fi

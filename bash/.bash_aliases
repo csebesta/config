@@ -59,20 +59,21 @@ alias sudo='sudo '
 alias df='df -h'
 alias free='free -h'
 
-# Add custom sripts to path (~/.sripts)
-## Aliases for using scripts
-#if [ -d "$HOME/.scripts" ] ; then
-#	PATH="$PATH:$HOME/.scripts"
-#fi
-
-## Add path for scripts in progress (unfinished) for easier testing
-#if [ -d "$HOME/.scriptst" ] ; then
-#	PATH="$PATH:$HOME/.scriptst"
-#fi
-
 # Aliases for scripts that replace or modify pre-existing program behavior
-alias tilda="$HOME/.bin/tildash"
+#alias tilda="tildash"
 alias pm-suspend="$HOME/.bin/pm-suspend"
+
+# Limit tilda to a single instance
+tilda () {
+
+	# Check if tilda is running before execution
+	if [ "$(pgrep -x tilda)" ]; then
+		echo "tilda is running"
+	else
+		tilda > /dev/null 2>&1 &
+	fi
+
+}
 
 # Change beep to visual representation
 # Critical urgency allows notification in fullscreen applications

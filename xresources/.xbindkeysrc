@@ -1,3 +1,6 @@
 # Set key for tilda
-"bash $HOME/.bin/tildash"
+"tilda"
   Control + grave
+
+"dmenu_run"
+  Control + p
