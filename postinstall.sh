@@ -147,7 +147,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Square'
 
 	# Change lock screen
-	gsettings set com.canonical.unity-greeter background-color '#2d2d2d'
+	gsettings set com.canonical.unity-greeter draw-user-backgrounds 'false'
 	gsettings set com.canonical.unity-greeter draw-grid 'false'
 
 fi
