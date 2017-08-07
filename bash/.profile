@@ -23,4 +23,4 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 PATH="$HOME/.bin:$HOME/.local/.bin:$PATH"
 
 # Execute backinfo script
-. backinfo.numix
+backinfo.numix
