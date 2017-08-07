@@ -43,6 +43,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	stow
 	suckless-tools
 	tilda
+	ttf-dejavu
 	vim
 	vlc
 	xbindkeys
