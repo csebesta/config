@@ -4,6 +4,14 @@
 
 SEP='----------'
 
+# Update repositories
+echo "Updating repositories..."
+sudo apt-get update > /dev/null 2>&1 \
+&& echo "Update successful" \
+|| { echo "Update failed"; exit 1; }
+
+echo $SEP
+
 # Add ppa
 read -p "Add ppa? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -21,8 +29,8 @@ fi
 
 echo $SEP
 
-# Update and install packages
-read -p "Update and install packages? (y/n) "
+# Install packages
+read -p "Install packages? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Define packages to be installed
@@ -40,12 +48,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	xbindkeys
 	xmonad
 	"
-
-	# Update repositories
-	echo "Updating repositories..."
-	sudo apt-get update > /dev/null 2>&1 \
-	&& echo "Update successful" \
-	|| echo "Update failed"
 
 	# Install packages
 	for i in $PACKAGES; do
@@ -68,12 +70,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	vagrant
 	virtualbox
 	"
-
-	# Update repositories
-	echo "Updating repositories..."
-	sudo apt-get update > /dev/null 2>&1 \
-	&& echo "Update successful" \
-	|| echo "Update failed"
 
 	# Install packages
 	for i in $PACKAGES; do
@@ -130,12 +126,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	numix-icon-theme
 	numix-icon-theme-square
 	"
-
-	# Update repositories
-	echo "Updating repositories..."
-	sudo apt-get update > /dev/null 2>&1 \
-	&& echo "Update successful" \
-	|| echo "Update failed"
 
 	# Install packages
 	for i in $PACKAGES; do
