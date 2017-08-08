@@ -88,14 +88,18 @@ else
 	"highlight nonText ctermbg=NONE
 endif
 
-" Change background
-" Requires solarized
-call togglebg#map("<F12>")
+"" Change background
+"" Requires solarized
+"call togglebg#map("<F12>")
 
-" Change to fullscreen
-" Requires wmctrl
-map <silent> <F11>
-\	:call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+"" Change to fullscreen
+"" Requires wmctrl
+"map <silent> <F11>
+"\	:call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+
+" Toggle line wrap
+map <F2>
+\	:set wrap!<CR>
 
 " Compile latex document to pdf
 " Requires pdflatex
