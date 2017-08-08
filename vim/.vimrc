@@ -25,6 +25,7 @@ nnoremap <space> za
 set autoindent
 set smartindent
 set encoding=utf-8
+set nowrap
 
 " Tab behavior
 set tabstop=4
