@@ -1,26 +1,29 @@
 #!/bin/bash
 # Color pallete: https://design.ubuntu.com/brand/colour-palette
+# Written by Chad Sebesta
 
 # Get screen resolution
-RESOLUTION="$(xdpyinfo | awk '/dimensions/{print $2}')"
+RESOLUTION="$( xdpyinfo | awk '/dimensions/{print $2}' )"
 
-# Set background to normal image
-#gsettings set org.gnome.desktop.background picture-uri \
-#file://$HOME/Pictures/Wallpapers/paperman.jpg
+# Create background
+gm convert \
+	-size $RESOLUTION xc:#2C001E \
+	/tmp/sombra.png
 
-# Create background and overlay sombra logo
-#convert -size $RESOLUTION xc:#002b36 /tmp/bgsombra.jpg
-convert -size $RESOLUTION xc:#2C001E /tmp/bgsombra.jpg
-composite -gravity center ~/Pictures/sombra.png /tmp/bgsombra.jpg \
-/tmp/bgsombra.jpg
+# Overlay skull
+gm composite \
+	-gravity center \
+	$HOME/Pictures/skull.png \
+	/tmp/sombra.png \
+	/tmp/sombra.png
 
 # Set background
 gsettings set org.gnome.desktop.background \
-picture-uri file:///tmp/bgsombra.jpg
+picture-uri file:///tmp/sombra.jpg
 
 ## Hide the unity launcher
 #gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1
 
-## Witty message
-#ICN="$HOME/Pictures/sombra.png"
-#notify-send -u critical -i $ICN 'HACKED'
+# Witty message
+ICN="$HOME/Pictures/skull.png"
+notify-send -u critical -i $ICN 'HACKED'

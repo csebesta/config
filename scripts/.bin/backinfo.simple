@@ -7,6 +7,7 @@
 # Alternate colors: 2C001E 002B36 333333
 # Alternate text colors: 555555 999999
 # Requires graphicsmagick
+# Written by Chad Sebesta
 
 # Get screen resolution
 RESOLUTION="$( xdpyinfo | awk '/dimensions/{print $2}' )"
