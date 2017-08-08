@@ -12,7 +12,7 @@ This configuration has been tested ONLY on Ubuntu 16.04, and is not guaranteed t
 
 Configuration files for specific programs can be installed via a simple stow command.
 
-    cd ~/
+    cd ~/.dotfiles
     stow DIRECTORY
     
 ## Automatic installation
