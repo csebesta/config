@@ -1,6 +1,7 @@
 #!/bin/bash
 # Limit tilda to a single instance
 # Useful when called from alias or script
+# Written by Chad Sebesta
 
 if [ "$(pgrep -x tilda)" ]; then
 	echo "tilda is running"

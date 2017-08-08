@@ -5,6 +5,7 @@
 # Color pallete: https://design.ubuntu.com/brand/colour-palette
 # Candidate colors: 2C001E 333333 2D2D2D
 # Text colors: FFFFFF F9F9F9 (with 2D2D2D) DEDEDE DCDCDC
+# Written by Chad Sebesta
 
 # Get screen resolution
 RESOLUTION="$(xdpyinfo | awk '/dimensions/{print $2}')"
