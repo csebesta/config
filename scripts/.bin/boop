@@ -19,7 +19,7 @@ gm composite \
 
 # Set background
 gsettings set org.gnome.desktop.background \
-picture-uri file:///tmp/sombra.jpg
+picture-uri file:///tmp/sombra.png
 
 ## Hide the unity launcher
 #gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-hide-mode 1

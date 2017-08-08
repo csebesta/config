@@ -18,6 +18,7 @@ alias ghc='ghc -hidir /tmp -odir /tmp'
 
 # Miscellaneous aliases
 alias redshift='redshift-gtk'
+alias bz='byzanz-record --delay=3'
 
 # Sudo does not work with aliases without an additional space
 alias sudo='sudo '
