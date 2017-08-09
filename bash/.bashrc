@@ -116,12 +116,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Set editing mode to vi
+set -o vi
+bind -m vi-insert "\C-l":clear-screen
+
+# Set editor to vi
+export EDITOR='vim'
+export VISUAL='vim'
+
 # Change dircolors
 DIRCOLORS="$HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark"
 if [ -f $DIRCOLORS ]; then
 	eval $(dircolors $DIRCOLORS)
 fi
-
-# Set editing mode to vi
-set -o vi
-bind -m vi-insert "\C-l":clear-screen
