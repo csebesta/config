@@ -49,7 +49,7 @@ The script will prompt for confirmation before installing each package defined i
 
 ### 4. Disable guest account
 
-The script will prompt for confirmation before adding files to the directory /etc/lightdm/lightdm.conf.d/. These files will 1) disable the guest account 2) hide the list of users in the greeter 3) force manual login.
+The script will prompt for confirmation before adding files to the directory `/etc/lightdm/lightdm.conf.d/`. These files will 1) disable the guest account 2) hide the list of users in the greeter 3) force manual login.
 
 ### 5. Adjust gtk settings
 
