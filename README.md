@@ -32,3 +32,25 @@ The setup.sh script will only prompt for confirmation once before deleting all b
 # Details
 
 ## postinstall.sh
+
+The primary script for configuring the system. It consists of 5 parts.
+
+### 1. Adding ppas
+
+The script will prompt for confirmation before installing each ppa defined in the script. Afterwards, the script will automatically update the repositories.
+
+### 2. Installing packages
+
+The script will promt for confirmation before installing each package defined in the script.
+
+### 3. Creating the homelab
+
+The script will prompt for confirmation before installing each package defined in the script. This will install packages that are userful for homelab operation.
+
+### 4. Disable guest account
+
+The script will prompt for confirmation before adding files to the directory /etc/lightdm/lightdm.conf.d/. These files will 1) disable the guest account 2) hide the list of users in the greeter 3) force manual login.
+
+### 5. Adjust gtk settings
+
+The script will prompt for confirmation before making simple visual changes to unity. The script will 1) install the numix theme and icons (The ppa must be installed first) 2) disable overlay scrollbars, which can cause conflicts with the numix theme 3) set the gtk theme and icons to numix 4) adjust the visual style of the lockscreen.
