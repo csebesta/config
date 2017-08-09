@@ -121,3 +121,6 @@ DIRCOLORS="$HOME/.dircolors/dircolors-solarized/dircolors.ansi-dark"
 if [ -f $DIRCOLORS ]; then
 	eval $(dircolors $DIRCOLORS)
 fi
+
+# Set editing mode to vi
+set -o vi
