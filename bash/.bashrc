@@ -122,5 +122,5 @@ if [ -f $DIRCOLORS ]; then
 	eval $(dircolors $DIRCOLORS)
 fi
 
-# Set editing mode to vi
-set -o vi
+## Set editing mode to vi
+#set -o vi
