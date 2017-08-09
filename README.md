@@ -23,7 +23,7 @@ In order to speed up the process of installation and configuration of Ubuntu 16.
     ./postinstall.sh
     ./setup.sh
 
-#### Note
+###### Note
 
 The setup.sh script will only prompt for confirmation once before deleting all broken symbolic links. To see a list of broken symbolic links before executing the script, run this command.
 
