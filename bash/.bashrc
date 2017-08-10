@@ -117,8 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 # Set editing mode to vi
+# See man 3 readline for more information
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
+bind -m vi-insert "\C-p":previous-history
+bind -m vi-insert "\C-n":next-history
 
 # Set editor to vi
 export EDITOR='vim'
