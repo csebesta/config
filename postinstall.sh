@@ -64,7 +64,7 @@ echo $SEP
 
 # Create homelab
 read -p "Create homelab? (y/n) "
-if [[ $REPLY =~ ^[Yy]$ ]]; then	
+if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Define packages to be installed
 	PACKAGES="
