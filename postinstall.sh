@@ -12,8 +12,8 @@ sudo apt-get update > /dev/null 2>&1 \
 
 echo $SEP
 
-# Add ppa
-read -p "Add ppa? (y/n) "
+# Add ppa repositories
+read -p "Add ppa repositories? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Define packages to be installed
