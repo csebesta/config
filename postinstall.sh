@@ -16,14 +16,25 @@ echo $SEP
 read -p "Add ppa? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-	# Numix repository
-	sudo add-apt-repository ppa:numix/ppa
+	# Define packages to be installed
+	REPOSITORIES="
+	numix/ppa
+	"
+
+	# Add repositories
+	for i in $REPOSITORIES; do
+		echo -n "Adding $i... "
+		sudo add-apt-repository -y ppa:$i > /dev/null 2>&1 \
+		&& echo "Successful" \
+		|| echo "Failed"
+	done
+
 
 	# Update repositories
-	echo "Updating repositories..."
+	echo -n "Updating repositories... "
 	sudo apt-get update > /dev/null 2>&1 \
-	&& echo "Update successful" \
-	|| echo "Update failed"
+	&& echo "Successful" \
+	|| echo "Failed"
 
 fi
 
