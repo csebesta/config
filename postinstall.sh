@@ -16,7 +16,7 @@ echo $SEP
 read -p "Add ppa repositories? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-	# Define packages to be installed
+	# Define repositories to be added
 	REPOSITORIES="
 	numix/ppa
 	"
