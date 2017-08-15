@@ -1,6 +1,6 @@
 set nocp
 execute pathogen#infect()
-filetype plugin off
+filetype plugin on
 filetype indent on
 syntax on
 
@@ -27,18 +27,31 @@ set smartindent
 set encoding=utf-8
 set nowrap
 
+" Disable automatic insertion of comment leaders
+au FileType * setlocal fo-=c fo-=r fo-=o
+
 " Tab behavior
-set tabstop=4
-set softtabstop=0
 set shiftwidth=4
-set noexpandtab
+set tabstop=4
 
 " Appearance
-set number
-set hlsearch incsearch
-set ignorecase smartcase
-set showcmd cursorline
-set ruler laststatus=2
+set number " Show line numbers
+set hlsearch " Highlight search results
+set incsearch " Search incrementally
+set ignorecase " Ignore case while searching
+set smartcase " Regard uppercase letters while searching
+set showcmd " Show command in lower bar
+set cursorline " Highlight current line
+set ruler " Display cursor position in status line
+set laststatus=2 " Always display satus line
+set wildmenu " Show completions for commands
+set showmatch " Highlight matching features
+set visualbell " Visual beeps instead of audible beeps
+
+" Backspace over indentation
+set backspace=indent,eol,start
+
+" Remove hightlighting
 nnoremap \ :noh<CR>
 
 " Faster scrolling
@@ -50,14 +63,17 @@ let g:netrw_home=$HOME
 
 " Graphical Vim
 if has('gui_running')
+
 	" Start maximized
 	set lines=999
 	set columns=999
+
 	" Disable toolbar/menubar/srollbars
-	"set guioptions-=m
+	set guioptions-=m
 	set guioptions-=T
 	set guioptions-=r
 	set guioptions-=L
+
 	" Hide buttons on the toolbar
 	aunmenu ToolBar.SaveAll
 	aunmenu ToolBar.LoadSesn
@@ -67,42 +83,44 @@ if has('gui_running')
 	aunmenu ToolBar.RunCtags
 	aunmenu ToolBar.TagJump
 	aunmenu ToolBar.FindHelp
-	" Colorscheme and font
+
+	" Colorscheme
 	set background=dark
 	colorscheme solarized
+
+	" Font
 	if has('gui_win32')
+
+		" Choose consolas font
 		set guifont=Consolas:h14:b
+
 	else
-		"set guifont=Monospace\ Bold\ 14
+
+		"set guifont=Consolas\ 16
 		"set guifont=Consolas\ Bold\ 14
-		set guifont=Consolas\ 16
+		"set guifont=Monospace\ Bold\ 14
+
 	endif
+
+" Console vim
 else
-	" Commented out lines may fix some terminal issues
-	" Whenever possible set terminal colors to solarized
-	"set t_Co=16
+
+	" Solarized theme
 	set background=dark
-	"let g:solarized_termcolors=256
 	colorscheme solarized
-	"highlight Normal ctermbg=NONE
-	"highlight nonText ctermbg=NONE
+
 endif
 
-"" Change background
-"" Requires solarized
-"call togglebg#map("<F12>")
+" Toggle paste
+set pastetoggle=<F3>
 
-"" Change to fullscreen
-"" Requires wmctrl
-"map <silent> <F11>
-"\	:call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" Toggle solarized background
+call togglebg#map("<F5>")
 
 " Toggle line wrap
 map <F2>
 \	:set wrap!<CR>
 
 " Compile latex document to pdf
-" Requires pdflatex
 nnoremap <F6>
 \	:w<Bar>!pdflatex %:t<CR>
-"extra commands go here (open viewer)
