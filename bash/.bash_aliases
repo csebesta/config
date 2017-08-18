@@ -16,8 +16,12 @@ alias ll='ls -l --color=auto'
 
 alias ghc='ghc -hidir /tmp -odir /tmp'
 
-# Miscellaneous aliases
-alias redshift='redshift-gtk'
+# Redshift aliases
+# Use 'redshift -x' to reset values
+alias night='redshift -O 3700k > /dev/null 2>&1'
+alias day='redshift -O 5500k > /dev/null 2>&1'
+
+# Screen recording aliases
 alias bz='byzanz-record --delay=3'
 
 # Sudo does not work with aliases without an additional space
