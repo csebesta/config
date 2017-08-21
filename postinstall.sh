@@ -4,7 +4,7 @@
 
 SEP='----------'
 
-# Update repositories
+# Update repositories, exit on failure
 echo "Updating repositories..."
 sudo apt-get update > /dev/null 2>&1 \
 && echo "Update successful" \
@@ -23,10 +23,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Add repositories
 	for i in $REPOSITORIES; do
+
+		# Perform simple error checking
 		echo -n "Adding $i... "
 		sudo add-apt-repository -y ppa:$i > /dev/null 2>&1 \
 		&& echo "Successful" \
 		|| echo "Failed"
+
 	done
 
 
@@ -63,10 +66,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Install packages
 	for i in $PACKAGES; do
+
+		# Perform simple error checking
 		echo -n "Installing $i... "
 		sudo apt-get install -y $i > /dev/null 2>&1 \
 		&& echo "Successful" \
 		|| echo "Failed"
+
 	done
 
 fi
@@ -85,10 +91,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Install packages
 	for i in $PACKAGES; do
+
+		# Perform simple error checking
 		echo -n "Installing $i... "
 		sudo apt-get install -y $i > /dev/null 2>&1 \
 		&& echo "Successful" \
 		|| echo "Failed"
+
 	done
 
 fi
@@ -141,10 +150,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 	# Install packages
 	for i in $PACKAGES; do
+
+		# Perform simple error checking
 		echo -n "Installing $i... "
 		sudo apt-get install -y $i > /dev/null 2>&1 \
 		&& echo "Successful" \
 		|| echo "Failed"
+
 	done
 
 	# Disable overlay scrollbars
