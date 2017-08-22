@@ -1,0 +1,12 @@
+#!/bin/bash
+# A script to recover the name of the user who initiated sudo
+# Still unclear if sudo should be used within scripts
+
+usr="$( env | grep SUDO_USER | cut -d "=" -f 2 )"
+
+echo $usr
+
+# Possible Changes:
+# 1. Force script to run as sudo, thus avoiding use of sudo in script
+# 2. Change commonly used constructs to functions (such as simple error checking)
+# 3. Improve documentation
