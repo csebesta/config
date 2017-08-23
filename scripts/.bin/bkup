@@ -1,0 +1,35 @@
+#!/bin/bash
+# Simple script to backup home directory daily
+# Written by Chad Sebesta
+
+# Define backup directory and file name
+DATE="$( date +'%Y-%m-%d' )"
+DIRNAME="$HOME/.backup/$DATE"
+FILENAME="$DIRNAME/$DATE.tar.gz"
+
+# Create backup directory if it does not exist
+if [ ! -d $DIRNAME ]; then
+	mkdir -p $DIRNAME
+fi
+
+# Create a file listing excluded directories
+echo "$( find $HOME -maxdepth 1 -name '.*' )" > $DIRNAME/exclude.txt
+
+# Create status prompt
+echo -n "Backing up $HOME... "
+
+# Backup primary directories
+# Exclude dotfiles and particular directories
+# Suppress output
+# Perform simple error checking
+tar czpf $FILENAME $HOME \
+	--exclude="$HOME/VirtualBox\ VMs" \
+	--exclude-from="$DIRNAME/exclude.txt" \
+	-g $DIRNAME/$DATE.snar \
+	> /dev/null 2>&1 \
+	&& echo "Successful" \
+	|| echo "Failed"
+
+# Generate md5 checksum for the backup file
+echo "Creating... $DATE.md5"
+md5sum $FILENAME > $DIRNAME/$DATE.md5
