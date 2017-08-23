@@ -2,6 +2,10 @@
 # Simple script to backup home directory daily
 # Written by Chad Sebesta
 
+# Potential improvements:
+# It may be preferrable to explicitly include directories
+# Error checking is lacking
+
 # Define backup directory and file name
 DATE="$( date +'%Y-%m-%d' )"
 DIRNAME="$HOME/.backup/$DATE"
