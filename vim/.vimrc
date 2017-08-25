@@ -123,4 +123,4 @@ map <F2>
 
 " Compile latex document to pdf
 nnoremap <F6>
-\	:w<Bar>!pdflatex %:t<CR>
+\	:w<Bar>!pdflatex %:t<CR><CR>
