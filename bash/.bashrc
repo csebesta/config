@@ -122,6 +122,8 @@ set -o vi
 bind -m vi-insert "\C-l":clear-screen
 bind -m vi-insert "\C-p":previous-history
 bind -m vi-insert "\C-n":next-history
+bind -m vi-insert "\C-a":beginning-of-line
+bind -m vi-insert "\C-e":end-of-line
 
 # Set editor to vi
 export EDITOR='vim'
