@@ -121,6 +121,14 @@ call togglebg#map("<F5>")
 map <F2>
 \	:set wrap!<CR>
 
-" Compile latex document to pdf
+" Save and compile latex document to pdf
+" <Bar> separates command sequences
 nnoremap <F6>
-\	:w<Bar>!pdflatex %:t<CR><CR>
+\	:w<Bar>!pdflatex %<CR><CR>
+"\	:w<Bar>!pdflatex %:t<CR><CR>
+
+" Save and compile xetex document to pdf
+" <Bar> separates command sequences
+nnoremap <F7>
+\	:w<Bar>!xelatex %<CR><CR>
+"\	:w<Bar>!xelatex %:t<CR><CR>
