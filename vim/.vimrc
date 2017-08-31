@@ -125,8 +125,3 @@ map <F2>
 " <Bar> separates command sequences
 nnoremap <F6>
 \	:w<Bar>!pdflatex %:t<CR><CR>
-
-" Save and compile xetex document to pdf
-" <Bar> separates command sequences
-nnoremap <F7>
-\	:w<Bar>!xelatex %:t<CR><CR>
