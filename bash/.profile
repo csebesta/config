@@ -24,3 +24,13 @@ PATH="$HOME/.bin:$HOME/.local/.bin:$PATH"
 
 # Execute backinfo script
 backinfo.numix
+
+# Set background to backinfo if desktop environment is xmonad
+if [ "$DESKTOP_SESSION" = "xmonad" ]; then
+	# Check if fehbg file exists
+	if [ -f "$HOME/.fehbg" ]; then
+		. "$HOME/.fehbg"
+	elif [ -f /tmp/backinfo.png ]; then
+		feh --bg-center /tmp/backinfo.png
+	fi
+fi
