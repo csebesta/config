@@ -23,7 +23,7 @@ nnoremap <space> za
 
 " General
 set autoindent
-set smartindent
+set nosmartindent
 set encoding=utf-8
 set nowrap
 
@@ -129,3 +129,7 @@ nnoremap <F6>
 "" Improve ansible yaml
 "autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 "autocmd FileType yaml setlocal indentkeys-=<:>
+
+" Execute python code
+map <F7>
+\	:w<Bar>!clear && python3 %<CR>

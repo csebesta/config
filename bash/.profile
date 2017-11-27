@@ -22,6 +22,11 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # Set PATH to include scripts
 PATH="$HOME/.bin:$HOME/.local/.bin:$PATH"
 
+# Set PATH to include blender release
+if [ -d "$HOME/.blender/blender-2.79-linux-glibc219-x86_64" ]; then
+	PATH="$HOME/.blender/blender-2.79-linux-glibc219-x86_64:$PATH"
+fi
+
 # Execute backinfo script
 backinfo.numix
 
