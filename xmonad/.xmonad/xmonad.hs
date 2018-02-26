@@ -1,16 +1,15 @@
 import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
+import System.IO
+
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Actions.NoBorders
 
 -- Status bar
-myStatusBar = 
-
--- Smart borders
-myLayoutHook = 
-
-    smartBorders (layoutHook def)
+myBar = "xmobar"
 
 -- Keybindings
 myKeys =
@@ -27,14 +26,16 @@ myKeys =
     , (( mod1Mask, xK_BackSpace ), spawn "amixer -D pulse set Master toggle" ) -- Mute and unmute
     , (( mod1Mask .|. controlMask, xK_l ), spawn "slock" ) -- Lock screen
     ]
-
 -- https://wiki.haskell.org/Xmonad/Config_archive/John_Goerzen's_Configuration
 -- https://beginners-guide-to-xmonad.readthedocs.io/configure_xmonadhs.html
 -- https://unix.stackexchange.com/questions/336701/xmonad-defaults-depreciation-what-is-the-future-proof-configuration
-main = xmonad $ def
+--main = xmonad $ def
+main = do
+xmproc <- spawnPipe "xmobar"
+xmonad $ def
 
-    -- Simple configruation
-    { terminal = "rxvt-unicode"
+    { manageHook = manageDocks <+> manageHook def
+    , layoutHook = smartBorders $ avoidStruts $ layoutHook def
+	, terminal = "rxvt-unicode"
     , borderWidth = 3
-    , layoutHook = myLayoutHook
     } `additionalKeys` myKeys
