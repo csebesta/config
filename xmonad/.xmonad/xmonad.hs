@@ -4,20 +4,17 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Actions.NoBorders
 
-myLayoutHook = smartBorders (layoutHook def)
+-- Status bar
+myStatusBar = 
 
--- https://wiki.haskell.org/Xmonad/Config_archive/John_Goerzen's_Configuration
--- https://beginners-guide-to-xmonad.readthedocs.io/configure_xmonadhs.html
--- https://unix.stackexchange.com/questions/336701/xmonad-defaults-depreciation-what-is-the-future-proof-configuration
-main = xmonad $ def
+-- Smart borders
+myLayoutHook = 
 
-    -- Simple configruation
-    { terminal = "rxvt-unicode"
-    , borderWidth = 3
-    , layoutHook = myLayoutHook
-    } `additionalKeys`
+    smartBorders (layoutHook def)
 
-    -- Additional keybindings
+-- Keybindings
+myKeys =
+
     [ (( mod1Mask, xK_p ), spawn "dmenu_run \
     \ -l 10 \
     \ -fn 'DejaVu Sans Mono-15' \
@@ -30,3 +27,14 @@ main = xmonad $ def
     , (( mod1Mask, xK_BackSpace ), spawn "amixer -D pulse set Master toggle" ) -- Mute and unmute
     , (( mod1Mask .|. controlMask, xK_l ), spawn "slock" ) -- Lock screen
     ]
+
+-- https://wiki.haskell.org/Xmonad/Config_archive/John_Goerzen's_Configuration
+-- https://beginners-guide-to-xmonad.readthedocs.io/configure_xmonadhs.html
+-- https://unix.stackexchange.com/questions/336701/xmonad-defaults-depreciation-what-is-the-future-proof-configuration
+main = xmonad $ def
+
+    -- Simple configruation
+    { terminal = "rxvt-unicode"
+    , borderWidth = 3
+    , layoutHook = myLayoutHook
+    } `additionalKeys` myKeys
