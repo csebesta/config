@@ -1,6 +1,17 @@
 #!/bin/bash
 # ~/.bash_aliases: a file containing user added aliases
 
+# Chromecast alias for local files
+# Requires knowledge of device ip address
+cast () {
+
+	# Exit media after playback, launch without gui, and cast to device
+	vlc --play-and-exit \
+		--intf dummy \
+		--sout="#chromecast{ip=192.168.0.109}" $1 > /dev/null 2>&1 &
+
+}
+
 # Help aliases
 alias info='info --vi-keys'
 
