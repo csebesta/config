@@ -12,12 +12,12 @@ import XMonad.Util.Run (spawnPipe)
 -- https://github.com/dmxt/Solarized-xmonad-xmobar
 myBar = "xmobar"
 myPP = xmobarPP
-	{  ppTitle = xmobarColor "#657b83" "" . shorten 100
+    {  ppTitle = xmobarColor "#657b83" "" . shorten 100
     , ppCurrent = xmobarColor "#c0c0c0" "" . wrap "" ""
-	, ppSep = xmobarColor "#c0c0c0" "" " | "
+    , ppSep = xmobarColor "#c0c0c0" "" " | "
     , ppUrgent = xmobarColor "#ff69b4" ""
-	, ppLayout = const "" -- Disables layout info
-	}
+    , ppLayout = const "" -- Disables layout info
+    }
 
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
@@ -54,7 +54,7 @@ main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 myConfig = def
     { manageHook = manageDocks <+> manageHook def
     , layoutHook = smartBorders $ avoidStruts $ layoutHook def
-	, terminal = "rxvt-unicode"
+    , terminal = "rxvt-unicode"
     , borderWidth = 1
     , normalBorderColor = myNormalBorderColor
     , focusedBorderColor = myFocusedBorderColor
