@@ -12,9 +12,9 @@ import XMonad.Util.Run (spawnPipe)
 -- https://github.com/dmxt/Solarized-xmonad-xmobar
 myBar = "xmobar"
 myPP = xmobarPP
-    {  ppTitle = xmobarColor "#657b83" "" . shorten 100
-    , ppCurrent = xmobarColor "#c0c0c0" "" . wrap "" ""
-    , ppSep = xmobarColor "#c0c0c0" "" " | "
+    { ppTitle = xmobarColor "#657b83" "" . shorten 100
+    , ppCurrent = xmobarColor "#93a1a1" "" . wrap "" ""
+    , ppSep = xmobarColor "#657b83" "" " | "
     , ppUrgent = xmobarColor "#ff69b4" ""
     , ppLayout = const "" -- Disables layout info
     }
@@ -24,17 +24,20 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 ------------------------------------------------------------------------
 -- Colors and borders
 myNormalBorderColor = "#002b36"
-myFocusedBorderColor = "#657b83"
+myFocusedBorderColor = "#93a1a1"
+--myFocusedBorderColor = "#839496"
+myBorderWidth = 1
 
 ------------------------------------------------------------------------
 -- Keybindings
 myKeys =
 
     [ (( mod1Mask, xK_p ), spawn "dmenu_run \
-    \ -l 10 \
-    \ -fn 'DejaVu Sans Mono-15' \
+    \ -fn 'DejaVu Sans Mono-11' \
+    \ -nb '#002b36' \
+    \ -nf '#586e75' \
     \ -sb '#073642' \
-    \ -nb '#002b36'" )
+    \ -sf '#93a1a1'" )
     , (( mod1Mask, xK_e ), spawn "nautilus --no-desktop" )
     , (( mod1Mask, 0x2d ), spawn "amixer -q sset Master 5%-" ) -- Lower volume
     , (( mod1Mask, 0x3d ), spawn "amixer -q sset Master 5%+" ) -- Raise volume
@@ -42,6 +45,7 @@ myKeys =
     , (( mod1Mask .|. controlMask, xK_l ), spawn "slock" ) -- Lock screen
     ]
 
+    -- \ -sf '#839496'" )
 ------------------------------------------------------------------------
 -- Main function
 -- https://beginners-guide-to-xmonad.readthedocs.io/configure_xmonadhs.html
@@ -55,7 +59,7 @@ myConfig = def
     { manageHook = manageDocks <+> manageHook def
     , layoutHook = smartBorders $ avoidStruts $ layoutHook def
     , terminal = "rxvt-unicode"
-    , borderWidth = 1
+    , borderWidth = myBorderWidth
     , normalBorderColor = myNormalBorderColor
     , focusedBorderColor = myFocusedBorderColor
     } `additionalKeys` myKeys
